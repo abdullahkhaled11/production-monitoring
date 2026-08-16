@@ -22,9 +22,12 @@ export function todayId(d = new Date()) {
 }
 
 export function formatDayId(dayId: string) {
-  const [y, m, d] = dayId.split("-").map(Number);
-  const date = new Date(y, (m ?? 1) - 1, d);
-  return `${AR_DAYS[date.getDay()]} ${d} ${AR_MONTHS[(m ?? 1) - 1]} ${y}`;
+  const parts = dayId.split("-").map(Number);
+  const y = parts[0] ?? 1970;
+  const m = parts[1] ?? 1;
+  const d = parts[2] ?? 1;
+  const date = new Date(y, m - 1, d);
+  return `${AR_DAYS[date.getDay()]} ${d} ${AR_MONTHS[m - 1]} ${y}`;
 }
 
 export function formatTime(ts: number) {
