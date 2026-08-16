@@ -10,33 +10,53 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as LogRouteImport } from './routes/log'
+import { Route as LineLineIdRouteImport } from './routes/line.$lineId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LogRoute = LogRouteImport.update({
+  id: '/log',
+  path: '/log',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LineLineIdRoute = LineLineIdRouteImport.update({
+  id: '/line/$lineId',
+  path: '/line/$lineId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/log': typeof LogRoute
+  '/line/$lineId': typeof LineLineIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/log': typeof LogRoute
+  '/line/$lineId': typeof LineLineIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/log': typeof LogRoute
+  '/line/$lineId': typeof LineLineIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/log' | '/line/$lineId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/log' | '/line/$lineId'
+  id: '__root__' | '/' | '/log' | '/line/$lineId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  LogRoute: typeof LogRoute
+  LineLineIdRoute: typeof LineLineIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +68,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/log': {
+      id: '/log'
+      path: '/log'
+      fullPath: '/log'
+      preLoaderRoute: typeof LogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/line/$lineId': {
+      id: '/line/$lineId'
+      path: '/line/$lineId'
+      fullPath: '/line/$lineId'
+      preLoaderRoute: typeof LineLineIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  LogRoute: LogRoute,
+  LineLineIdRoute: LineLineIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
