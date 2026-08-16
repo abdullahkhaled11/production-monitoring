@@ -11,6 +11,8 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as LogRouteImport } from './routes/log'
+import { Route as ReportsRouteImport } from './routes/reports'
+import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as LineLineIdRouteImport } from './routes/line.$lineId'
 
 const IndexRoute = IndexRouteImport.update({
@@ -23,6 +25,16 @@ const LogRoute = LogRouteImport.update({
   path: '/log',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ReportsRoute = ReportsRouteImport.update({
+  id: '/reports',
+  path: '/reports',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LineLineIdRoute = LineLineIdRouteImport.update({
   id: '/line/$lineId',
   path: '/line/$lineId',
@@ -32,30 +44,38 @@ const LineLineIdRoute = LineLineIdRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/log': typeof LogRoute
+  '/reports': typeof ReportsRoute
+  '/settings': typeof SettingsRoute
   '/line/$lineId': typeof LineLineIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/log': typeof LogRoute
+  '/reports': typeof ReportsRoute
+  '/settings': typeof SettingsRoute
   '/line/$lineId': typeof LineLineIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/log': typeof LogRoute
+  '/reports': typeof ReportsRoute
+  '/settings': typeof SettingsRoute
   '/line/$lineId': typeof LineLineIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/log' | '/line/$lineId'
+  fullPaths: '/' | '/log' | '/reports' | '/settings' | '/line/$lineId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/log' | '/line/$lineId'
-  id: '__root__' | '/' | '/log' | '/line/$lineId'
+  to: '/' | '/log' | '/reports' | '/settings' | '/line/$lineId'
+  id: '__root__' | '/' | '/log' | '/reports' | '/settings' | '/line/$lineId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   LogRoute: typeof LogRoute
+  ReportsRoute: typeof ReportsRoute
+  SettingsRoute: typeof SettingsRoute
   LineLineIdRoute: typeof LineLineIdRoute
 }
 
@@ -75,6 +95,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LogRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/reports': {
+      id: '/reports'
+      path: '/reports'
+      fullPath: '/reports'
+      preLoaderRoute: typeof ReportsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/line/$lineId': {
       id: '/line/$lineId'
       path: '/line/$lineId'
@@ -88,6 +122,8 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   LogRoute: LogRoute,
+  ReportsRoute: ReportsRoute,
+  SettingsRoute: SettingsRoute,
   LineLineIdRoute: LineLineIdRoute,
 }
 export const routeTree = rootRouteImport
