@@ -40,9 +40,18 @@ export function AddJobSheet({
 
   const submit = () => {
     const quantity = Number(required);
-    if (!supervisorId) return toast.error("اختر المشرف");
-    if (!bagTypeId) return toast.error("اختر نوع الشنطة");
-    if (!quantity || quantity <= 0) return toast.error("أدخل الكمية المطلوبة");
+    if (!supervisorId) {
+      toast.error("اختر المشرف");
+      return;
+    }
+    if (!bagTypeId) {
+      toast.error("اختر نوع الشنطة");
+      return;
+    }
+    if (!quantity || quantity <= 0) {
+      toast.error("أدخل الكمية المطلوبة");
+      return;
+    }
     addJob({ lineId, supervisorId, bagTypeId, requiredQuantity: Math.floor(quantity) });
     toast.success("تم بدء الإنتاج بنجاح ✓");
     reset();
@@ -95,7 +104,10 @@ export function AddJobSheet({
                   className="h-12"
                   onClick={() => {
                     const id = addSupervisor(newSupervisor);
-                    if (!id) return toast.error("أدخل اسم المشرف");
+                    if (!id) {
+                      toast.error("أدخل اسم المشرف");
+                      return;
+                    }
                     setSupervisorId(id);
                     setNewSupervisor(null);
                     toast.success("تمت إضافة المشرف ✓");
@@ -138,7 +150,10 @@ export function AddJobSheet({
                   className="h-12"
                   onClick={() => {
                     const id = addBagType(newBag);
-                    if (!id) return toast.error("أدخل اسم الشنطة");
+                    if (!id) {
+                      toast.error("أدخل اسم الشنطة");
+                      return;
+                    }
                     setBagTypeId(id);
                     setNewBag(null);
                     toast.success("تمت إضافة نوع الشنطة ✓");
