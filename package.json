@@ -1,5 +1,5 @@
 {
-  "name": "tanstack_start_ts",
+  "name": "production-monitoring",
   "private": true,
   "sideEffects": false,
   "type": "module",
