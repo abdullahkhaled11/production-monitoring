@@ -12,4 +12,8 @@ export default defineConfig({
     // nitro/vite builds from this
     server: { entry: "server" },
   },
+  // Pin the Nitro build target to Vercel. Without this the Lovable config
+  // defaults to the `cloudflare-module` preset, which emits a Worker bundle
+  // that Vercel cannot serve.
+  nitro: { preset: "vercel" },
 });
