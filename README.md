@@ -11,6 +11,8 @@ A mobile-first, right-to-left (Arabic) web app for tracking bag production on a
 factory floor. Supervisors open a job on a line, log output as it is produced, and
 watch live progress toward the required quantity — from a phone, one-handed.
 
+**Live demo:** https://production-monitoring-three.vercel.app
+
 ---
 
 ## Stack
