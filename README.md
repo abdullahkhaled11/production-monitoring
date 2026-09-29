@@ -23,7 +23,7 @@ watch live progress toward the required quantity — from a phone, one-handed.
 | Language | TypeScript |
 | Styling | Tailwind CSS 4 |
 | Components | Radix UI primitives (shadcn/ui), Lucide icons, Sonner toasts |
-| Data | React Query, Recharts |
+| Data | React Query, localStorage persistence |
 | Build | Vite, ESLint, Prettier |
 
 ## Features
